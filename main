@@ -1,0 +1,16 @@
+
+#!/bin/bash
+
+# Cricbuzz live cricket scores unofficial API endpoint
+API_URL="https://cricbuzz-cricket.p.rapidapi.com/matches"
+
+# Add your RapidAPI key here (get one from https://rapidapi.com)
+API_KEY="YOUR_RAPIDAPI_KEY"
+
+# Fetch live scores from Cricbuzz
+response=$(curl -s -X GET "$API_URL" -H "X-RapidAPI-Key: $API_KEY" -H "X-RapidAPI-Host: cricbuzz-cricket.p.rapidapi.com")
+
+# Extract and display live match data using jq
+matches=$(echo $response | jq '.matches[] | {match_id: .match_id, team1: .team1.name, team2: .team2.name, status: .status}')
+
+# Display 
